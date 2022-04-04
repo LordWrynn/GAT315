@@ -5,11 +5,12 @@ using UnityEngine.EventSystems;
 
 public class BodyCreator : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler {
 
-	[SerializeField] BodyCreator bodyPrefab;
+	[SerializeField] Body bodyPrefab;
+	[SerializeField] FloatData speed;
 
 	bool action = false;
 	bool pressed = false;
-	float timer = 0;
+	//float timer = 0;
 
 	public void OnPointerDown(PointerEventData eventData) {
 		action = true;
@@ -21,15 +22,17 @@ public class BodyCreator : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     }
 
     public void OnPointerUp(PointerEventData eventData) {
-        throw new System.NotImplementedException();
+//        throw new System.NotImplementedException();
     }
 
     void Update() {
-		if (action) {
+		if (action && (pressed || Input.GetKey(KeyCode.LeftControl))) {
+			pressed = false;
 			Vector3 position = Simulator.Instance.GetScreenToWorldPosition(Input.mousePosition);
 			Body body = Instantiate(bodyPrefab, position, Quaternion.identity);
+			body.shape.size = size.value;
+			body.ApplyForce(Random.insideUnitCircle.normalized * speed.value, Body.ForceMode.VELOCITY);
 			Simulator.Instance.bodies.Add(body);
-			body.ApplyForce(Random.insideUnitCircle.normalized);
         }
 	}
 }

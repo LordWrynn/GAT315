@@ -4,6 +4,12 @@ using UnityEngine;
 
 public static class Integrator {
     public static void ExplicitEuler(Body body, float dt) {
+        body.position += body.velocity * dt;
+        body.velocity += body.acceleration * dt;
+    }
+    public static void SemiExplicitEuler(Body body, float dt) {
+        body.velocity += body.acceleration * dt;
+        body.position += body.velocity * dt;
 
     }
 }
