@@ -14,8 +14,7 @@ public class Simulator : Singleton<Simulator>
 	Camera activeCamera;
 	float timeAccumulator = 0;
 
-	private void Start()
-	{
+	private void Start() {
 		activeCamera = Camera.main;
 	}
 
@@ -33,10 +32,7 @@ public class Simulator : Singleton<Simulator>
 		// integrate physics simulation with fixed delta time
 		while (timeAccumulator >= fixedDeltaTime)
 		{
-			bodies.ForEach(body =>
-			{
-				Integrator.SemiImplicitEuler(body, fixedDeltaTime);
-			});
+			bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedDeltaTime));
 			timeAccumulator -= fixedDeltaTime;
 		}
 
@@ -49,4 +45,14 @@ public class Simulator : Singleton<Simulator>
 		Vector2 world = activeCamera.ScreenToWorldPoint(screen);
 		return world;
 	}
+
+	public Body GetScreenToBody(Vector3 screen) {
+		Body body = null;
+
+		Ray ray = activeCamera.ScreenPointToRay(screen);
+		RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+		if(hit.collider) hit.collider.gameObject.TryGetComponent<Body>(out body);
+
+		return body;
+    }
 }

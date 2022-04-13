@@ -553,6 +553,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1606287161}
     m_Modifications:
+    - target: {fileID: 5920143643485069552, guid: 1d599937fc532eb4a9e6f78156b1aa04, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920143643485069552, guid: 1d599937fc532eb4a9e6f78156b1aa04, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920143643485069552, guid: 1d599937fc532eb4a9e6f78156b1aa04, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a2678d372508834e82445f7fd2b34c8, type: 2}
+    - target: {fileID: 5920143643485069552, guid: 1d599937fc532eb4a9e6f78156b1aa04, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920143643485069552, guid: 1d599937fc532eb4a9e6f78156b1aa04, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StringData, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5920143644896177740, guid: 1d599937fc532eb4a9e6f78156b1aa04, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

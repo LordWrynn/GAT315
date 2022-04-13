@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class Body : MonoBehaviour
 {
-    public enum eForceMode
-	{
+    public enum eForceMode {
         Force,
 		Acceleration,
         Velocity
 	}
 
-	public enum eBodyType
-	{
+	public enum eBodyType {
 		Static,
 		Kinematic,
 		Dynamic
 	}
 
 	public Shape shape;
+	public List<Spring> springs = new List<Spring>();
 
 	public eBodyType bodyType { get; set; } = eBodyType.Dynamic;
     public Vector2 position { get => transform.position; set => transform.position = value; }
