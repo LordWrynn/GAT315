@@ -30,8 +30,13 @@ public class Simulator : Singleton<Simulator>
 		forces.ForEach(force => force.ApplyForce(bodies));
 
 		// integrate physics simulation with fixed delta time
-		while (timeAccumulator >= fixedDeltaTime)
-		{
+		while (timeAccumulator >= fixedDeltaTime) {
+			bodies.ForEach(body => body.shape.color = Color.white); //DEBUG CODE
+			//Collision.CreateContacts(bodies, out var contacts);
+			//contacts.ForEach(contact => {
+			//	contact.bodyA.shape.color = Color.red;
+			//	contact.bodyB.shape.color = Color.red;
+			//});
 			bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedDeltaTime));
 			timeAccumulator -= fixedDeltaTime;
 		}
@@ -46,13 +51,20 @@ public class Simulator : Singleton<Simulator>
 		return world;
 	}
 
-	public Body GetScreenToBody(Vector3 screen) {
+	public Ray GetScreenToRay(Vector2 screen) {
+		return activeCamera.ScreenPointToRay(screen);
+	}
+
+	public Body GetScreenToBody(Vector2 screen) {
 		Body body = null;
 
-		Ray ray = activeCamera.ScreenPointToRay(screen);
+		Ray ray = GetScreenToRay(screen);
 		RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-		if(hit.collider) hit.collider.gameObject.TryGetComponent<Body>(out body);
+		if (hit.collider) {
+			hit.collider.gameObject.TryGetComponent<Body>(out body);
+		}
 
 		return body;
-    }
+	}
+
 }
